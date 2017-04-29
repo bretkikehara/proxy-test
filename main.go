@@ -4,10 +4,13 @@ import (
 	"crypto/tls"
 	"log"
 	"net/http"
+	"os"
 	"os/exec"
+	"os/signal"
 	"regexp"
 	"runtime"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/elazarl/goproxy"
@@ -64,6 +67,14 @@ func main() {
 	proxy.Verbose = false
 
 	proxyOn()
-	defer proxyOff()
+
+	c := make(chan os.Signal, 2)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-c
+		proxyOff()
+		os.Exit(1)
+	}()
+
 	log.Fatal(http.ListenAndServe(":8888", proxy))
 }
