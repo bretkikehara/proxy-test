@@ -1,0 +1,4 @@
+package: github.com/bretkikehara/proxy-test
+import:
+- package: github.com/elazarl/goproxy
+  version: ^1.0.0
