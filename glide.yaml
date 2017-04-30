@@ -1,4 +1,7 @@
 package: github.com/bretkikehara/proxy-test
 import:
 - package: github.com/elazarl/goproxy
-  version: ^1.0.0
+  version: aacba83f36a55ac31cbb71c06547a328c0cd1604
+- package: github.com/ditashi/jsbeautifier-go
+  subpackages:
+  - jsbeautifier
